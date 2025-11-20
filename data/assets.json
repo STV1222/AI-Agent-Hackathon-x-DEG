@@ -1,0 +1,220 @@
+[
+  {
+    "id": "SUB_001",
+    "name": "Westminster Substation",
+    "type": "substation",
+    "lat": 51.5074,
+    "lon": -0.1278,
+    "capacity_kw": 5000,
+    "criticality": "high"
+  },
+  {
+    "id": "SUB_002",
+    "name": "Canary Wharf Substation",
+    "type": "substation",
+    "lat": 51.5045,
+    "lon": -0.0185,
+    "capacity_kw": 8000,
+    "criticality": "high"
+  },
+  {
+    "id": "SUB_003",
+    "name": "King's Cross Substation",
+    "type": "substation",
+    "lat": 51.5308,
+    "lon": -0.1238,
+    "capacity_kw": 4500,
+    "criticality": "medium"
+  },
+  {
+    "id": "SUB_004",
+    "name": "Greenwich Substation",
+    "type": "substation",
+    "lat": 51.4826,
+    "lon": -0.0077,
+    "capacity_kw": 3500,
+    "criticality": "medium"
+  },
+  {
+    "id": "SUB_005",
+    "name": "Hammersmith Substation",
+    "type": "substation",
+    "lat": 51.4928,
+    "lon": -0.2229,
+    "capacity_kw": 4000,
+    "criticality": "medium"
+  },
+  {
+    "id": "EV_001",
+    "name": "Westminster EV Hub",
+    "type": "ev_hub",
+    "lat": 51.5007,
+    "lon": -0.1246,
+    "capacity_kw": 500,
+    "criticality": "medium",
+    "num_charging_stations": 20
+  },
+  {
+    "id": "EV_002",
+    "name": "Canary Wharf EV Hub",
+    "type": "ev_hub",
+    "lat": 51.5051,
+    "lon": -0.0209,
+    "capacity_kw": 800,
+    "criticality": "high",
+    "num_charging_stations": 35
+  },
+  {
+    "id": "EV_003",
+    "name": "Heathrow EV Hub",
+    "type": "ev_hub",
+    "lat": 51.4700,
+    "lon": -0.4543,
+    "capacity_kw": 1200,
+    "criticality": "high",
+    "num_charging_stations": 50
+  },
+  {
+    "id": "EV_004",
+    "name": "Covent Garden EV Hub",
+    "type": "ev_hub",
+    "lat": 51.5128,
+    "lon": -0.1238,
+    "capacity_kw": 300,
+    "criticality": "low",
+    "num_charging_stations": 12
+  },
+  {
+    "id": "SOLAR_001",
+    "name": "Thames Barrier Solar Farm",
+    "type": "solar_farm",
+    "lat": 51.4947,
+    "lon": 0.0493,
+    "capacity_kw": 2000,
+    "criticality": "medium",
+    "surface_area_m2": 5000
+  },
+  {
+    "id": "SOLAR_002",
+    "name": "London Gateway Solar Park",
+    "type": "solar_farm",
+    "lat": 51.5238,
+    "lon": 0.0839,
+    "capacity_kw": 3500,
+    "criticality": "medium",
+    "surface_area_m2": 8000
+  },
+  {
+    "id": "SOLAR_003",
+    "name": "Richmond Solar Installation",
+    "type": "solar_farm",
+    "lat": 51.4613,
+    "lon": -0.3034,
+    "capacity_kw": 1500,
+    "criticality": "low",
+    "surface_area_m2": 4000
+  },
+  {
+    "id": "SUB_006",
+    "name": "St. Thomas Hospital Substation",
+    "type": "substation",
+    "lat": 51.4984,
+    "lon": -0.1183,
+    "capacity_kw": 6000,
+    "criticality": "high",
+    "feeds": "hospital"
+  },
+  {
+    "id": "SUB_007",
+    "name": "Paddington Substation",
+    "type": "substation",
+    "lat": 51.5154,
+    "lon": -0.1755,
+    "capacity_kw": 5500,
+    "criticality": "high",
+    "feeds": "transport_hub"
+  },
+  {
+    "id": "SUB_008",
+    "name": "Waterloo Substation",
+    "type": "substation",
+    "lat": 51.5032,
+    "lon": -0.1136,
+    "capacity_kw": 7000,
+    "criticality": "high",
+    "feeds": "transport_hub"
+  },
+  {
+    "id": "SUB_009",
+    "name": "Islington Substation",
+    "type": "substation",
+    "lat": 51.5355,
+    "lon": -0.1058,
+    "capacity_kw": 3000,
+    "criticality": "medium",
+    "feeds": "residential"
+  },
+  {
+    "id": "SUB_010",
+    "name": "Tower Bridge Substation",
+    "type": "substation",
+    "lat": 51.5055,
+    "lon": -0.0754,
+    "capacity_kw": 4000,
+    "criticality": "medium",
+    "feeds": "mixed"
+  },
+  {
+    "id": "EV_005",
+    "name": "Shoreditch EV Hub",
+    "type": "ev_hub",
+    "lat": 51.5226,
+    "lon": -0.0814,
+    "capacity_kw": 600,
+    "criticality": "medium",
+    "num_charging_stations": 25
+  },
+  {
+    "id": "EV_006",
+    "name": "Battersea EV Hub",
+    "type": "ev_hub",
+    "lat": 51.4816,
+    "lon": -0.1504,
+    "capacity_kw": 400,
+    "criticality": "low",
+    "num_charging_stations": 16
+  },
+  {
+    "id": "SOLAR_004",
+    "name": "Wembley Solar Array",
+    "type": "solar_farm",
+    "lat": 51.5560,
+    "lon": -0.2795,
+    "capacity_kw": 2500,
+    "criticality": "medium",
+    "surface_area_m2": 6000
+  },
+  {
+    "id": "SUB_011",
+    "name": "Docklands Substation",
+    "type": "substation",
+    "lat": 51.5079,
+    "lon": -0.0197,
+    "capacity_kw": 6500,
+    "criticality": "high",
+    "feeds": "business_district",
+    "flood_zone": true
+  },
+  {
+    "id": "SUB_012",
+    "name": "Hackney Substation",
+    "type": "substation",
+    "lat": 51.5492,
+    "lon": -0.0546,
+    "capacity_kw": 3500,
+    "criticality": "medium",
+    "feeds": "residential",
+    "flood_zone": true
+  }
+]
+

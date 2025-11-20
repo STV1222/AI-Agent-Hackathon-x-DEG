@@ -1,0 +1,85 @@
+.beckn-log {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.beckn-log h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.empty-log {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.log-entries {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.log-entry {
+  background: #f7fafc;
+  border-left: 3px solid #667eea;
+  padding: 0.8rem;
+  margin-bottom: 0.6rem;
+  border-radius: 4px;
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.log-asset {
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.log-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.log-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.log-service {
+  font-weight: 500;
+}
+
+.log-provider {
+  color: #777;
+  font-size: 0.8rem;
+}
+
+.log-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #edf2f7;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.log-info p {
+  margin: 0.3rem 0;
+}
+

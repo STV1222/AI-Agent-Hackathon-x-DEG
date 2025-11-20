@@ -1,0 +1,44 @@
+{
+  "london_heatwave_3d": {
+    "name": "London Heatwave - 3 Days",
+    "location": "London",
+    "event_type": "heatwave",
+    "start_date": "2025-11-26T00:00:00Z",
+    "duration_hours": 72,
+    "description": "Extended heatwave with temperatures peaking at 37°C for 48 hours",
+    "weather": {
+      "max_temp_celsius": 37,
+      "min_temp_celsius": 22,
+      "avg_temp_celsius": 30,
+      "humidity_percent": 65
+    }
+  },
+  "london_flood_24h": {
+    "name": "London Flood - 24 Hours",
+    "location": "London",
+    "event_type": "flood",
+    "start_date": "2025-11-26T00:00:00Z",
+    "duration_hours": 24,
+    "description": "Heavy rainfall causing flash flooding in low-lying areas",
+    "weather": {
+      "total_rainfall_mm": 80,
+      "max_rainfall_per_hour_mm": 15,
+      "wind_speed_kmh": 45
+    }
+  },
+  "london_heatwave_5d": {
+    "name": "London Heatwave - 5 Days",
+    "location": "London",
+    "event_type": "heatwave",
+    "start_date": "2025-11-26T00:00:00Z",
+    "duration_hours": 120,
+    "description": "Prolonged heatwave with consistent high temperatures",
+    "weather": {
+      "max_temp_celsius": 35,
+      "min_temp_celsius": 20,
+      "avg_temp_celsius": 28,
+      "humidity_percent": 60
+    }
+  }
+}
+

@@ -1,0 +1,224 @@
+.risk-panel h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.risk-panel h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: #555;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.risk-panel h4 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.empty-state {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.risks-section {
+  margin-bottom: 1.5rem;
+}
+
+.risks-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.risk-item {
+  background: #f7fafc;
+  border-left: 3px solid #cbd5e0;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-radius: 4px;
+}
+
+.risk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.risk-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.badge-critical {
+  background: #e53e3e;
+}
+
+.badge-high {
+  background: #ed8936;
+}
+
+.badge-medium {
+  background: #ecc94b;
+  color: #333;
+}
+
+.badge-low {
+  background: #48bb78;
+}
+
+.asset-id {
+  font-size: 0.85rem;
+  color: #666;
+  font-family: monospace;
+}
+
+.risk-reason {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0.3rem 0;
+  font-weight: 500;
+}
+
+.risk-impact {
+  font-size: 0.85rem;
+  color: #777;
+  margin: 0.3rem 0 0 0;
+}
+
+.ai-section {
+  margin-top: 2rem;
+}
+
+.ai-btn, .beckn-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ai-btn:hover {
+  background: #5568d3;
+}
+
+.beckn-btn {
+  background: #764ba2;
+  margin-top: 1rem;
+}
+
+.beckn-btn:hover {
+  background: #5a3a7a;
+}
+
+.mitigation-content {
+  margin-top: 1rem;
+}
+
+.ai-summary {
+  background: #edf2f7;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.ai-summary p {
+  margin: 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.actions-list {
+  margin-top: 1rem;
+}
+
+.action-item {
+  background: #fff5e6;
+  border-left: 3px solid #ed8936;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-radius: 4px;
+}
+
+.action-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.action-asset {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.urgency-badge {
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.urgency-high {
+  background: #fed7d7;
+  color: #c53030;
+}
+
+.urgency-medium {
+  background: #feebc8;
+  color: #c05621;
+}
+
+.urgency-low {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.action-type {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+  margin: 0.3rem 0;
+}
+
+.action-justification {
+  font-size: 0.85rem;
+  color: #777;
+  margin: 0.3rem 0;
+  line-height: 1.4;
+}
+
+.action-time {
+  font-size: 0.8rem;
+  color: #999;
+  margin: 0.3rem 0 0 0;
+}
+
+.info-box {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #edf2f7;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.info-box p {
+  margin: 0.3rem 0;
+}
+

@@ -1,0 +1,91 @@
+.scenario-panel h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.scenario-panel h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.predefined-scenarios {
+  margin-bottom: 1.5rem;
+}
+
+.scenario-btn {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.scenario-btn:hover {
+  background: #5568d3;
+}
+
+.scenario-form {
+  margin-top: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.run-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: #48bb78;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.2s;
+}
+
+.run-btn:hover {
+  background: #38a169;
+}
+
+.info-box {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #edf2f7;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.info-box p {
+  margin: 0.3rem 0;
+}
+
