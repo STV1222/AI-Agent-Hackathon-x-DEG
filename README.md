@@ -64,4 +64,3 @@ streamlit run app.py
 
 - **Teammate A**: Backend & Data Lead
 - **Teammate B**: AI & Frontend Lead
-
