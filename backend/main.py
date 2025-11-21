@@ -6,8 +6,12 @@ FastAPI application for risk simulation and AI agent orchestration
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 from datetime import datetime
+
+from utils import load_assets
+from weather import get_weather_for_scenario
+from risk_engine import simulate_risk
 
 app = FastAPI(
     title="Extreme Weather Resilience Agent API",
@@ -126,17 +130,25 @@ async def run_scenario(scenario: ScenarioRequest):
     """
     Run risk simulation for a given weather scenario.
     
-    TODO (Teammate A - Day 2):
-    - Fetch weather data based on location and dates
-    - Load DEG assets for the location
-    - Run risk engine simulation
-    - Return assets with risk results
+    Loads DEG assets for the location, fetches weather data, and runs risk simulation.
     """
-    # Placeholder response
+    # Load assets for the location
+    assets_data = load_assets(scenario.location)
+    
+    # Get weather data for the scenario
+    weather_data = get_weather_for_scenario(scenario)
+    
+    # Run risk simulation
+    risk_results = simulate_risk(scenario.event_type, weather_data, assets_data)
+    
+    # Convert to Pydantic models
+    assets = [Asset(**asset) for asset in assets_data]
+    risks = [RiskResult(**risk) for risk in risk_results]
+    
     return ScenarioResponse(
         scenario=scenario,
-        assets=[],
-        risks=[]
+        assets=assets,
+        risks=risks
     )
 
 
