@@ -19,12 +19,18 @@ from weather import get_weather_for_scenario
 from risk_engine import simulate_risk
 from agent_service import generate_mitigation_plan
 from beckn_service import execute_beckn_flow
+from beckn_models import OnSearchRequest, OnSelectRequest, OnConfirmRequest, BecknResponse, Ack
+from beckn_bap import BAP_STATE
+from mock_bpp import router as mock_bpp_router
 
 app = FastAPI(
     title="Extreme Weather Resilience Agent API",
     description="AI agent for DEG asset risk simulation and mitigation orchestration",
     version="0.1.0"
 )
+
+# Include Mock BPP Router
+app.include_router(mock_bpp_router)
 
 # CORS middleware for frontend connection
 app.add_middleware(
@@ -200,6 +206,48 @@ async def execute_beckn_services(request: BecknExecutionRequest):
     return BecknExecutionResponse(
         log=logs
     )
+
+
+# ============================================================================
+# BAP Callbacks (Received from BPP)
+# ============================================================================
+
+@app.post("/beckn/on_search", response_model=BecknResponse)
+async def on_search(request: OnSearchRequest):
+    """Callback for search results"""
+    tx_id = request.context.transaction_id
+    if tx_id in BAP_STATE:
+        BAP_STATE[tx_id]["status"] = "SEARCH_COMPLETED"
+        BAP_STATE[tx_id]["catalog"] = request.message.catalog
+        BAP_STATE[tx_id]["last_update"] = datetime.utcnow()
+        print(f"BAP: Received on_search for {tx_id}")
+    else:
+        print(f"BAP: Received on_search for unknown tx {tx_id}")
+    return BecknResponse(message=Ack())
+
+@app.post("/beckn/on_select", response_model=BecknResponse)
+async def on_select(request: OnSelectRequest):
+    """Callback for selection quote"""
+    tx_id = request.context.transaction_id
+    if tx_id in BAP_STATE:
+        BAP_STATE[tx_id]["status"] = "SELECT_COMPLETED"
+        BAP_STATE[tx_id]["quote"] = request.message.order.quote
+        BAP_STATE[tx_id]["order"] = request.message.order # Update order with quote
+        BAP_STATE[tx_id]["last_update"] = datetime.utcnow()
+        print(f"BAP: Received on_select for {tx_id}")
+    return BecknResponse(message=Ack())
+
+@app.post("/beckn/on_confirm", response_model=BecknResponse)
+async def on_confirm(request: OnConfirmRequest):
+    """Callback for confirmation"""
+    tx_id = request.context.transaction_id
+    if tx_id in BAP_STATE:
+        BAP_STATE[tx_id]["status"] = "CONFIRM_COMPLETED"
+        BAP_STATE[tx_id]["confirmed_order"] = request.message.order
+        BAP_STATE[tx_id]["last_update"] = datetime.utcnow()
+        print(f"BAP: Received on_confirm for {tx_id}")
+    return BecknResponse(message=Ack())
+
 
 
 if __name__ == "__main__":
