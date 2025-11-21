@@ -8,10 +8,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
 
 from utils import load_assets
 from weather import get_weather_for_scenario
 from risk_engine import simulate_risk
+from agent_service import generate_mitigation_plan
 
 app = FastAPI(
     title="Extreme Weather Resilience Agent API",
@@ -157,17 +163,13 @@ async def get_mitigation_plan(request: AgentMitigationRequest):
     """
     Call AI agent to generate mitigation plan based on risk results.
     
-    TODO (Teammate B - Day 2):
-    - Format prompt with scenario + risks + assets
-    - Call LLM API (OpenAI/Claude)
-    - Parse JSON response into MitigationAction list
-    - Return summary + structured actions
+    Uses Google Gemini to analyze scenario and risks.
     """
-    # Placeholder response
-    return AgentMitigationResponse(
-        summary_text="AI agent will analyze risks and recommend mitigation actions.",
-        mitigation_actions=[]
-    )
+    # Call Agent Service
+    agent_result = await generate_mitigation_plan(request)
+    
+    # Convert dict result to Pydantic model
+    return AgentMitigationResponse(**agent_result)
 
 
 @app.post("/beckn/execute", response_model=BecknExecutionResponse)
