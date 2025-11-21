@@ -18,6 +18,7 @@ from utils import load_assets
 from weather import get_weather_for_scenario
 from risk_engine import simulate_risk
 from agent_service import generate_mitigation_plan
+from beckn_service import execute_beckn_flow
 
 app = FastAPI(
     title="Extreme Weather Resilience Agent API",
@@ -176,15 +177,28 @@ async def get_mitigation_plan(request: AgentMitigationRequest):
 async def execute_beckn_services(request: BecknExecutionRequest):
     """
     Simulate Beckn-style service search and confirmation for mitigation actions.
-    
-    TODO (Teammate A - Day 2):
-    - For each action, call beckn_search(service_type, location)
-    - Simulate select_and_confirm for chosen provider
-    - Return execution log
     """
-    # Placeholder response
+    logs = []
+    
+    # Process each action
+    for action in request.actions:
+        # Execute Beckn flow (Search -> Select -> Confirm)
+        # We assume "location" is implicitly known or passed (using "London" default here for simplicity 
+        # or we could extract from action if needed, but action doesn't have location. 
+        # Real implementation would pass context.)
+        result = await execute_beckn_flow(action.action_type, "London")
+        
+        # Create log entry
+        log_entry = BecknExecutionLog(
+            asset_id=action.asset_id,
+            service_type=action.action_type,
+            provider=result.get("provider"),
+            status=result.get("status", "failed")
+        )
+        logs.append(log_entry)
+        
     return BecknExecutionResponse(
-        log=[]
+        log=logs
     )
 
 
