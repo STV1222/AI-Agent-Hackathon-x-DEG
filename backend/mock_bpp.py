@@ -17,16 +17,20 @@ router = APIRouter(prefix="/mock-bpp", tags=["Mock BPP"])
 
 # Mock Data Inventory
 INVENTORY = {
-    "deploy_mobile_generator": [
-        {"id": "gen_100kw", "name": "100kW Mobile Generator", "price": "150.0", "desc": "Diesel generator on trailer"},
-        {"id": "gen_500kw", "name": "500kW Power Unit", "price": "600.0", "desc": "Industrial grade power unit"}
+    "dispatch_battery_discharge": [
+        {"id": "vpp_discharge_500", "name": "Residential Battery Discharge (500kWh)", "price": "0.15", "desc": "Virtual Power Plant A"},
+        {"id": "comm_battery_1mw", "name": "Commercial Battery Export (1MW)", "price": "0.12", "desc": "Industrial Storage Unit"}
     ],
-    "increase_cooling": [
-        {"id": "chiller_port", "name": "Portable Chiller", "price": "200.0", "desc": "Air cooled chiller 50 ton"},
-        {"id": "spot_cool", "name": "Spot Cooler", "price": "50.0", "desc": "5 ton spot cooler"}
+    "reduce_ev_load": [
+        {"id": "ev_curtail_lv1", "name": "EV Smart Charging Curtailment (Level 1)", "price": "0.10", "desc": "ChargePoint Network - 20% Reduction"},
+        {"id": "ev_curtail_lv2", "name": "EV Smart Charging Curtailment (Level 2)", "price": "0.25", "desc": "ChargePoint Network - 50% Reduction"}
+    ],
+    "shift_hvac_load": [
+        {"id": "hvac_shift_office", "name": "Commercial HVAC Load Shift", "price": "0.08", "desc": "Office Park Flex Program"},
+        {"id": "hvac_shift_retail", "name": "Retail Center Pre-Cooling", "price": "0.09", "desc": "Retail Flex Network"}
     ],
     "fallback": [
-        {"id": "generic_service", "name": "General Service", "price": "100.0", "desc": "Standard service request"}
+        {"id": "generic_flex", "name": "General Flexibility Service", "price": "0.20", "desc": "Standard Demand Response"}
     ]
 }
 
@@ -47,9 +51,18 @@ async def process_search(request: SearchRequest):
     
     # Simplified matching logic
     inv_key = "fallback"
+    provider_name = "Mock Provider Services"
+    
     for key in INVENTORY.keys():
         if key in query_item_name:
             inv_key = key
+            # Set specific provider names based on service type
+            if key == "dispatch_battery_discharge":
+                provider_name = "Tesla Virtual Power Plant"
+            elif key == "reduce_ev_load":
+                provider_name = "ChargePoint Network"
+            elif key == "shift_hvac_load":
+                provider_name = "Honeywell Smart Grid Solutions"
             break
             
     for prod in INVENTORY[inv_key]:
@@ -71,8 +84,8 @@ async def process_search(request: SearchRequest):
         descriptor=Descriptor(name="Mock BPP Catalog"),
         providers=[
             Provider(
-                id="prov_mock_1",
-                descriptor=Descriptor(name="Mock Provider Services"),
+                id=f"prov_{inv_key}",
+                descriptor=Descriptor(name=provider_name),
                 items=matched_items
             )
         ]

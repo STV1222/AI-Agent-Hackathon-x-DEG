@@ -29,42 +29,42 @@ def calculate_risk_for_asset(asset: Dict[str, Any], weather_data: Dict[str, Any]
         
         # Risk calculation for heatwave
         if max_temp >= 35:
-            # High temperature risk
+            # High temperature risk -> Grid Congestion Risk
             if asset_type == "substation":
-                # Substations are sensitive to overheating
+                # Substations are sensitive to overheating AND load spikes
                 if max_temp >= 37 and duration_hours >= 48:
                     risk_level = "CRITICAL"
-                    reason = f"Forecast {max_temp}°C for {duration_hours}h, exceeds design temperature 35°C"
-                    expected_impact = "Transformer overheating risk, potential outages"
+                    reason = f"Projected Load > 120% Capacity (A/C Spike at {max_temp}°C)"
+                    expected_impact = "Immediate feeder overload risk, potential thermal runaway"
                 elif max_temp >= 36:
                     risk_level = "HIGH"
-                    reason = f"Forecast {max_temp}°C for {duration_hours}h, approaching critical threshold"
-                    expected_impact = "Increased cooling demand, possible capacity reduction"
+                    reason = f"Projected Load > 105% Capacity (High A/C Demand)"
+                    expected_impact = "Transformer aging acceleration, voltage sag risk"
                 else:
                     risk_level = "MEDIUM"
-                    reason = f"Forecast {max_temp}°C for {duration_hours}h"
-                    expected_impact = "Monitor cooling systems closely"
+                    reason = f"Projected Load approaching 95% Capacity"
+                    expected_impact = "Monitor reserve margins"
                 
                 # Increase risk for critical assets
                 if risk_level == "MEDIUM" and criticality == "high":
                     risk_level = "HIGH"
-                    reason += " (critical infrastructure)"
+                    reason += " (critical feeder)"
             elif asset_type == "ev_hub":
-                # EV hubs less sensitive but still affected
+                # EV hubs -> Coincident Peak Contributors
                 if max_temp >= 37 and duration_hours >= 48:
                     risk_level = "HIGH"
-                    reason = f"Forecast {max_temp}°C for {duration_hours}h, may affect charging equipment"
-                    expected_impact = "Potential charging speed reduction or equipment shutdown"
+                    reason = f"Coincident Peak Contributor: EV Charging + Grid Stress"
+                    expected_impact = "Local feeder congestion likely during evening peak"
                 elif max_temp >= 36:
                     risk_level = "MEDIUM"
-                    reason = f"Forecast {max_temp}°C for {duration_hours}h"
-                    expected_impact = "Monitor charging infrastructure"
+                    reason = f"Potential Peak Contributor"
+                    expected_impact = "Monitor coincident load"
             elif asset_type == "solar_farm":
-                # Solar farms: high temp can reduce efficiency
+                # Solar farms: high temp can reduce efficiency -> Supply shortfall
                 if max_temp >= 37:
                     risk_level = "MEDIUM"
-                    reason = f"Forecast {max_temp}°C, solar panel efficiency may decrease"
-                    expected_impact = "5-10% efficiency reduction possible"
+                    reason = f"Thermal derating: PV efficiency drop predicted"
+                    expected_impact = "Reduced local generation capacity (~5-10%)"
     
     elif event_type == "flood":
         total_rainfall = weather_data.get("total_rainfall_mm", 0)

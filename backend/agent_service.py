@@ -24,9 +24,11 @@ async def generate_mitigation_plan(request_data: Any) -> Dict[str, Any]:
     
     # Construct prompt
     prompt = f"""
-    You are an expert in utility asset risk management and extreme weather resilience.
-    Analyze the following scenario and risks to generate specific mitigation actions.
-
+    You are an expert Distribution System Operator (DSO) Flexibility Orchestrator.
+    Your goal is to manage grid congestion and prevent outages using Distributed Energy Resources (DERs) and Flexibility Services.
+    
+    Analyze the following grid scenario and identified risks.
+    
     SCENARIO:
     Location: {scenario.location}
     Event: {scenario.event_type}
@@ -35,33 +37,35 @@ async def generate_mitigation_plan(request_data: Any) -> Dict[str, Any]:
     ASSETS:
     {json.dumps([a.model_dump() for a in assets], indent=2)}
 
-    IDENTIFIED RISKS:
+    IDENTIFIED RISKS (Grid Constraints):
     {json.dumps([r.model_dump() for r in risks], indent=2)}
 
     TASK:
-    Generate a list of mitigation actions to address the high and critical risks.
+    Generate a Flexibility Dispatch Plan to address high and critical grid risks.
+    Prioritize non-wires alternatives (Demand Response, Flexibility) over physical interventions.
+
     For each action, specify:
-    - asset_id: The ID of the asset to protect
-    - action_type: Specific action (e.g., "deploy_mobile_generator", "install_flood_barrier", "increase_cooling", "dispatch_repair_crew")
+    - asset_id: The ID of the asset (feeder/substation) requiring relief
+    - action_type: Specific flexibility service (MUST use one of: "dispatch_battery_discharge", "reduce_ev_load", "shift_hvac_load", "deploy_mobile_generator")
     - urgency: "low", "medium", or "high"
-    - justification: Why this action is needed
-    - target_time: A relative time string (e.g., "2025-11-26T10:00:00Z") - calculate based on start date {scenario.start_date} if possible, or just use a valid ISO timestamp.
+    - justification: Technical justification referencing load reduction (e.g., "Peak shaving required due to 110% projected loading")
+    - target_time: A relative time string (e.g., "2025-11-26T10:00:00Z")
 
     RESPONSE FORMAT:
     Return ONLY a valid JSON object with two keys:
-    1. "summary_text": A brief text summary of the strategy.
+    1. "summary_text": A brief executive summary of the flexibility strategy.
     2. "mitigation_actions": A list of action objects matching the fields above.
 
     Example JSON:
     {{
-        "summary_text": "Focus on protecting the substation from flooding...",
+        "summary_text": "Initiating peak shaving via VPP battery discharge to relieve substation overload...",
         "mitigation_actions": [
             {{
                 "asset_id": "sub_1",
-                "action_type": "deploy_sandbags",
+                "action_type": "dispatch_battery_discharge",
                 "urgency": "high",
-                "justification": "Flood risk critical",
-                "target_time": "2025-11-26T12:00:00Z"
+                "justification": "Projected load > 110% capacity due to AC spike",
+                "target_time": "2025-11-26T14:00:00Z"
             }}
         ]
     }}
