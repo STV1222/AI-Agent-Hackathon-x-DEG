@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './ScenarioPanel.css';
+import './LoadingSpinner.css';
 
-const ScenarioPanel = ({ onRunScenario }) => {
+const ScenarioPanel = ({ onRunScenario, loading }) => {
   const [location, setLocation] = useState('London');
   const [eventType, setEventType] = useState('heatwave');
   const [startDate, setStartDate] = useState('2025-11-26T00:00');
@@ -40,72 +41,94 @@ const ScenarioPanel = ({ onRunScenario }) => {
   return (
     <div className="scenario-panel">
       <h2>🌍 Scenario Configuration</h2>
-      
-      <div className="predefined-scenarios">
-        <h3>Quick Scenarios</h3>
-        {predefinedScenarios.map((scenario) => (
-          <button
-            key={scenario.id}
-            className="scenario-btn"
-            onClick={() => handlePredefinedScenario(scenario)}
-          >
-            {scenario.name}
-          </button>
-        ))}
+      <div className="scenario-panel-content">
+        <div className="predefined-scenarios">
+          <h3>Quick Scenarios</h3>
+          {predefinedScenarios.map((scenario) => (
+            <button
+              key={scenario.id}
+              className="scenario-btn"
+              onClick={() => handlePredefinedScenario(scenario)}
+              disabled={loading}
+            >
+              {scenario.name}
+            </button>
+          ))}
+        </div>
+
+        <form id="scenario-form" onSubmit={handleSubmit} className="scenario-form">
+          <h3>Custom Scenario</h3>
+          
+          <div className="form-group">
+            <label>Location</label>
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="London"
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Event Type</label>
+            <select
+              value={eventType}
+              onChange={(e) => setEventType(e.target.value)}
+            >
+              <option value="heatwave">Heatwave</option>
+              <option value="flood">Flood</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Start Date & Time</label>
+            <input
+              type="datetime-local"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Duration (hours)</label>
+            <input
+              type="number"
+              value={durationHours}
+              onChange={(e) => setDurationHours(e.target.value)}
+              min="1"
+              max="168"
+            />
+          </div>
+        </form>
       </div>
-
-      <form onSubmit={handleSubmit} className="scenario-form">
-        <h3>Custom Scenario</h3>
-        
-        <div className="form-group">
-          <label>Location</label>
-          <input
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="London"
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Event Type</label>
-          <select
-            value={eventType}
-            onChange={(e) => setEventType(e.target.value)}
-          >
-            <option value="heatwave">Heatwave</option>
-            <option value="flood">Flood</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label>Start Date & Time</label>
-          <input
-            type="datetime-local"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Duration (hours)</label>
-          <input
-            type="number"
-            value={durationHours}
-            onChange={(e) => setDurationHours(e.target.value)}
-            min="1"
-            max="168"
-          />
-        </div>
-
-        <button type="submit" className="run-btn">
-          ▶️ Run Simulation
+      <div className="scenario-panel-footer">
+        <button 
+          type="button" 
+          className={`run-btn ${loading ? 'loading' : ''}`}
+          onClick={() => {
+            if (loading) return;
+            const scenarioData = {
+              location,
+              event_type: eventType,
+              start_date: new Date(startDate).toISOString(),
+              duration_hours: parseInt(durationHours),
+            };
+            onRunScenario(scenarioData);
+          }}
+          disabled={loading}
+        >
+          {loading ? (
+            <>
+              <span className="loading-spinner"></span>
+              Processing...
+            </>
+          ) : (
+            <>▶️ Run Simulation</>
+          )}
         </button>
-      </form>
-
-      <div className="info-box">
-        <p><strong>Data powered by:</strong></p>
-        <p>DEG asset registry (mocked)</p>
+        <div className="info-box">
+          <p><strong>Data powered by:</strong> DEG asset registry (mocked)</p>
+        </div>
       </div>
     </div>
   );

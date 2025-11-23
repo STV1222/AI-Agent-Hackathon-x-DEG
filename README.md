@@ -20,19 +20,42 @@ An AI agent that uses weather + energy network data on the **Digital Energy Grid
 - **Frontend**: React + Leaflet (or Streamlit as alternative)
 - **Data**: Mock DEG assets, weather APIs (Open-Meteo/OpenWeather)
 
-## Setup
+## Quick Setup
+
+**📖 For detailed setup instructions, see [SETUP.md](./SETUP.md)**
+
+### Prerequisites
+- Python 3.12+
+- Node.js 16+ and npm
+- Google Gemini API Key ([Get it here](https://makersuite.google.com/app/apikey))
 
 ### Backend Setup
 
 ```bash
 cd backend
+
+# Install dependencies (using uv - recommended)
+uv sync
+
+# OR using venv + pip
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload
+pip install fastapi uvicorn pydantic python-dotenv google-generativeai httpx
+
+# Create .env file with your API key
+echo "GOOGLE_API_KEY=your_api_key_here" > .env
+
+# Run the server
+uv run uvicorn main:app --reload
+# OR: uvicorn main:app --reload (if using venv)
 ```
 
-### Frontend Setup (React)
+**⚠️ Important:** Create a `.env` file in the `backend/` directory with:
+```
+GOOGLE_API_KEY=your_actual_google_api_key
+```
+
+### Frontend Setup
 
 ```bash
 cd frontend
@@ -40,13 +63,9 @@ npm install
 npm start
 ```
 
-### Frontend Setup (Streamlit Alternative)
-
-```bash
-cd frontend/streamlit
-pip install -r requirements.txt
-streamlit run app.py
-```
+The app will be available at:
+- **Frontend:** http://localhost:3000
+- **Backend API:** http://localhost:8000
 
 ## Day 1 Goals
 
