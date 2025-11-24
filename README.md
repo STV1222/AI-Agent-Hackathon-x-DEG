@@ -2,6 +2,14 @@
 
 An AI-powered agentic orchestration system for Distribution System Operators (DSOs) that forecasts grid overloads, discovers Distributed Energy Resources (DERs) via Beckn Protocol, and coordinates load flexibility to prevent feeder-level congestion and outages.
 
+## 🎬 Demo Video
+
+[![Demo Video](https://img.youtube.com/vi/jDOHLDDqOqw/maxresdefault.jpg)](https://www.youtube.com/watch?v=jDOHLDDqOqw)
+
+**Watch the full demo** showing our AI-powered agent forecasting grid risks and orchestrating DERs through Beckn Protocol.
+
+---
+
 ## 🎯 Problem Focus
 
 **Problem Statement 1: Utility Interface with Agentic Orchestration for Grid-Scale Demand Flexibility**
